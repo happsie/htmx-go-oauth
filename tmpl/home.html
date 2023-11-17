@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>HTMX - Home</title>
+    <script src="https://unpkg.com/htmx.org@1.9.6"
+            integrity="sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+    <div class="user">
+        <img class="user-logo" src="{{ .ProfileImageUrl }}">
+        <div class="user-info">
+            <p>{{ .DisplayName }}</p>
+            <p>{{ .Email }}</p>
+            <p>{{ .ID }}</p>
+        </div>
+    </div>
+</main>
+</body>
+</html>

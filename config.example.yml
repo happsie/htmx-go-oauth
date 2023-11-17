@@ -1,0 +1,15 @@
+port: 8080
+
+oauth:
+    redirectUrl: something
+    clientId: something
+    clientSecret: something
+    endpoint: something
+
+db:
+    user: root
+    password: password
+    database: pixelwars
+
+jwt:
+    secret: secret

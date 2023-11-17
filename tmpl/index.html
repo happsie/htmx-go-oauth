@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>HTMX - Login</title>
+    <script src="https://unpkg.com/htmx.org@1.9.6"
+            integrity="sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+    <div class="twitch-login">
+        <h1>Login</h1>
+        <button hx-get="/api/auth/login">
+            <img src="/images/TwitchGlitchWhite.png" class="twitch-glitch">
+            <span>Continue with Twitch</span>
+        </button>
+        <a href="https://github.com/happsie" target="_blank" class="copy">&copy; Happsie 2023</a>
+    </div>
+</main>
+</body>
+</html>

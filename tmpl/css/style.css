@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Exo 2', sans-serif;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #4D4C7D;
+    min-width: 100svw;
+    min-height: 100svh;
+}
+
+.twitch-login {
+    font-size: 12pt;
+    padding: 1em;
+    background-color: #363062;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    max-width: 250px;
+    max-height: 250px;
+    color: white;
+}
+
+.twitch-login button {
+    background-color: #a970ff;
+    outline: 0;
+    padding: 1em;
+    border-radius: 10px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.twitch-glitch {
+    max-width: 20px;
+    max-height: 20px;
+    margin-right: 5px
+}
+
+.copy {
+    text-decoration: none;
+    color: white;
+    margin: .5em;
+}
+
+.copy:after {
+    color: white;
+}
+
+.user {
+    padding: 1em;
+    background-color: #363062;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.user-info {
+    color: white;
+}
+
+.user-logo {
+    max-width: 50px;
+    max-height: 50px;
+    border-radius: 100%;
+    margin: .5em;
+}
