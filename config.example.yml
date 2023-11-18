@@ -1,15 +1,15 @@
 port: 8080
 
-oauth:
+oauth: 
     redirectUrl: something
     clientId: something
     clientSecret: something
     endpoint: something
 
-db:
+db: 
     user: root
     password: password
-    database: pixelwars
+    database: gohtmx
 
-jwt:
+jwt: 
     secret: secret
