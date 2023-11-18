@@ -86,5 +86,4 @@ func (lh loginHandler) Callback(c echo.Context) error {
 	cookie.HttpOnly = true
 	c.SetCookie(cookie)
 	return c.Redirect(http.StatusSeeOther, "/")
-	//return c.Render(200, "home.html", nil)
 }

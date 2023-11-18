@@ -9,6 +9,7 @@
 </head>
 <body>
 <main class="container">
+    <button hx-on="click: document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC'">Logout</button>
     <div class="user">
         <img class="user-logo" src="{{ .ProfileImageUrl }}">
         <div class="user-info">

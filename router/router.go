@@ -7,7 +7,7 @@ import (
 	"github.com/happise/pixelwars/service"
 	"github.com/happise/pixelwars/utils"
 
-	echojwt "github.com/labstack/echo-jwt/v4"
+	//echojwt "github.com/labstack/echo-jwt/v4"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	slogecho "github.com/samber/slog-echo"
@@ -20,7 +20,7 @@ func Init(container container.Container) *echo.Echo {
 	}
 	e.Use(middleware.Recover())
 	e.Renderer = service.InitTemplates()
-	e.Use(echojwt.WithConfig(GetJwtConfig(container)))
+	//e.Use(echojwt.WithConfig(GetJwtConfig(container))) Set this on routes instead! https://github.com/labstack/echo/issues/1737
 	e.Static("/css", "tmpl/css")
 	e.Static("/images", "tmpl/images")
 	createLoginHandlers(e, container)
