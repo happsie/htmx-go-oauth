@@ -6,6 +6,7 @@ import (
 	"github.com/happise/pixelwars/config"
 	"github.com/happise/pixelwars/model"
 	"github.com/labstack/echo/v4"
+	"strconv"
 )
 
 func GetAuthInfo(c echo.Context, config config.Config) (model.JwtInfo, error) {
@@ -20,10 +21,15 @@ func GetAuthInfo(c echo.Context, config config.Config) (model.JwtInfo, error) {
 	if err != nil {
 		return model.JwtInfo{}, err
 	}
+
+	exp, err := strconv.ParseInt(fmt.Sprintf("%s", claims["exp"]), 10, 64)
+	if err != nil {
+		return model.JwtInfo{}, err
+	}
 	jwtInfo := model.JwtInfo{
 		UserId:   fmt.Sprintf("%v", claims["userId"]),
 		Username: fmt.Sprintf("%v", claims["displayName"]),
-		Exp:      0,
+		Exp:      exp,
 	}
 	return jwtInfo, nil
 }

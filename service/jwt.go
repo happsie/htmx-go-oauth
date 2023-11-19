@@ -4,7 +4,6 @@ import (
 	"github.com/golang-jwt/jwt"
 	"github.com/happise/pixelwars/container"
 	"github.com/happise/pixelwars/model"
-	"time"
 )
 
 type JWTService interface {
@@ -25,7 +24,7 @@ func (js jwtService) CreateJWT(user model.TwitchUser, expiry int64) (string, err
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"userId":      user.ID,
 		"displayName": user.DisplayName,
-		"exp":         time.Now().Add(72 * time.Hour).Unix(),
+		"exp":         expiry,
 	})
 	tokenString, err := token.SignedString([]byte(js.container.GetConfig().JWT.Secret))
 	if err != nil {
