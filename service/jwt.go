@@ -2,8 +2,8 @@ package service
 
 import (
 	"github.com/golang-jwt/jwt"
-	"github.com/happise/pixelwars/container"
-	"github.com/happise/pixelwars/model"
+	"github.com/happsie/gohtmx/container"
+	"github.com/happsie/gohtmx/model"
 )
 
 type JWTService interface {

@@ -1,31 +1,16 @@
 package repository
 
 import (
+	"errors"
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/happise/pixelwars/config"
+	"github.com/golang-migrate/migrate/v4"
+	"github.com/golang-migrate/migrate/v4/database/mysql"
+	_ "github.com/golang-migrate/migrate/v4/source/file"
+	"github.com/happsie/gohtmx/config"
 	"github.com/jmoiron/sqlx"
 	"log/slog"
 )
-
-const schema = `
-CREATE TABLE IF NOT EXISTS users (
-	id varchar(255) PRIMARY KEY NOT NULL,
-	profile_image_url varchar(255) NOT NULL,
-	login varchar(255) NOT NULL,
-	display_name varchar(255) NOT NULL,
-	email varchar(255) NOT NULL
-);
-`
-
-/* TODO: Not working for some reason to put in schema.
-CREATE TABLE IF NOT EXISTS user_tokens (
-user_id VARCHAR(255) PRIMARY KEY NOT NULL,
-access_token VARCHAR(100) NOT NULL,
-refresh_token VARCHAR(100) NOT NULL,
-FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-);
-*/
 
 func NewDatabase(log *slog.Logger, config config.Config) (*sqlx.DB, error) {
 	log.Info("connecting to database")
@@ -37,10 +22,18 @@ func NewDatabase(log *slog.Logger, config config.Config) (*sqlx.DB, error) {
 	if err != nil {
 		return nil, err
 	}
-	_, err = db.Exec(schema)
+	driver, err := mysql.WithInstance(db.DB, &mysql.Config{})
 	if err != nil {
 		return nil, err
 	}
 	log.Info("database connection established")
+	m, err := migrate.NewWithDatabaseInstance("file://migrations", "mysql", driver)
+	if err != nil {
+		return nil, err
+	}
+	err = m.Up()
+	if err != nil && !errors.Is(err, migrate.ErrNoChange) {
+		return nil, err
+	}
 	return db, nil
 }

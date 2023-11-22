@@ -2,11 +2,11 @@ package handlers
 
 import (
 	"fmt"
-	"github.com/happise/pixelwars/container"
-	"github.com/happise/pixelwars/model"
-	"github.com/happise/pixelwars/repository"
-	"github.com/happise/pixelwars/service"
-	"github.com/happise/pixelwars/utils"
+	"github.com/happsie/gohtmx/container"
+	"github.com/happsie/gohtmx/model"
+	"github.com/happsie/gohtmx/repository"
+	"github.com/happsie/gohtmx/service"
+	"github.com/happsie/gohtmx/utils"
 	"github.com/labstack/echo/v4"
 	gonanoid "github.com/matoous/go-nanoid/v2"
 	"net/http"
@@ -20,7 +20,7 @@ type LoginHandler interface {
 }
 type loginHandler struct {
 	container      container.Container
-	twitchService  service.TwitchAuthService
+	twitchService  service.AuthService
 	userRepository repository.UserRepository
 	jwtService     service.JWTService
 	twitchApi      service.TwitchApiService
@@ -32,7 +32,7 @@ var states []string
 func NewLoginHandler(container container.Container) LoginHandler {
 	return &loginHandler{
 		container:      container,
-		twitchService:  service.NewTwitchAuthService(container),
+		twitchService:  service.NewAuthService(container),
 		userRepository: repository.NewUserRepository(container),
 		jwtService:     service.NewJWTService(container),
 		twitchApi:      service.NewTwitchApiService(container),

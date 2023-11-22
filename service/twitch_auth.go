@@ -2,25 +2,25 @@ package service
 
 import (
 	"context"
-	"github.com/happise/pixelwars/container"
+	"github.com/happsie/gohtmx/container"
 	"golang.org/x/oauth2"
 )
 
-type TwitchAuthService interface {
+type AuthService interface {
 	VerifyCallback(code string) (*oauth2.Token, error)
 }
 
-type twitchAuthService struct {
+type authService struct {
 	container container.Container
 }
 
-func NewTwitchAuthService(container container.Container) TwitchAuthService {
-	return &twitchAuthService{
+func NewAuthService(container container.Container) AuthService {
+	return &authService{
 		container: container,
 	}
 }
 
-func (ds twitchAuthService) VerifyCallback(code string) (*oauth2.Token, error) {
+func (ds authService) VerifyCallback(code string) (*oauth2.Token, error) {
 	oauth := ds.container.GetOauthConfig()
 	token, err := oauth.Exchange(context.Background(), code)
 	if err != nil {

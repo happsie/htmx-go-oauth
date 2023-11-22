@@ -1,11 +1,11 @@
 package router
 
 import (
-	"github.com/happise/pixelwars/container"
-	"github.com/happise/pixelwars/handlers"
-	"github.com/happise/pixelwars/repository"
-	"github.com/happise/pixelwars/service"
-	"github.com/happise/pixelwars/utils"
+	"github.com/happsie/gohtmx/container"
+	"github.com/happsie/gohtmx/handlers"
+	"github.com/happsie/gohtmx/repository"
+	"github.com/happsie/gohtmx/service"
+	"github.com/happsie/gohtmx/utils"
 	"net/http"
 
 	echojwt "github.com/labstack/echo-jwt/v4"
@@ -52,7 +52,7 @@ func createTemplateHandlers(e *echo.Echo, container container.Container) {
 
 func createLoginHandlers(e *echo.Echo, container container.Container) {
 	loginHandler := handlers.NewLoginHandler(container)
-	e.GET("/auth/callback", loginHandler.Callback) // TODO: Update api path, auth/callback
-	e.GET("/auth/login", loginHandler.Login)       // TODO: Update api path, auth/login
-	e.POST("/auth/logout", loginHandler.Logout)    // TODO: Update api path, auth/logout
+	e.GET("/auth/callback", loginHandler.Callback)
+	e.GET("/auth/login", loginHandler.Login)
+	e.POST("/auth/logout", loginHandler.Logout)
 }

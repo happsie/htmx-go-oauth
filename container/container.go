@@ -1,7 +1,7 @@
 package container
 
 import (
-	"github.com/happise/pixelwars/config"
+	"github.com/happsie/gohtmx/config"
 	"github.com/jmoiron/sqlx"
 	"golang.org/x/oauth2"
 	"log/slog"

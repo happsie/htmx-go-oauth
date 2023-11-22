@@ -3,8 +3,8 @@ package service
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/happise/pixelwars/container"
-	"github.com/happise/pixelwars/model"
+	"github.com/happsie/gohtmx/container"
+	"github.com/happsie/gohtmx/model"
 	"io"
 	"net/http"
 )

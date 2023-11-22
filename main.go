@@ -2,10 +2,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/happise/pixelwars/config"
-	"github.com/happise/pixelwars/container"
-	"github.com/happise/pixelwars/repository"
-	"github.com/happise/pixelwars/router"
+	"github.com/happsie/gohtmx/config"
+	"github.com/happsie/gohtmx/container"
+	"github.com/happsie/gohtmx/repository"
+	"github.com/happsie/gohtmx/router"
 	"log/slog"
 	"os"
 )

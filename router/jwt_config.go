@@ -1,7 +1,7 @@
 package router
 
 import (
-	"github.com/happise/pixelwars/container"
+	"github.com/happsie/gohtmx/container"
 	echojwt "github.com/labstack/echo-jwt/v4"
 	"github.com/labstack/echo/v4"
 	"net/http"

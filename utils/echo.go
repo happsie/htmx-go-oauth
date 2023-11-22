@@ -3,8 +3,8 @@ package utils
 import (
 	"fmt"
 	"github.com/golang-jwt/jwt"
-	"github.com/happise/pixelwars/config"
-	"github.com/happise/pixelwars/model"
+	"github.com/happsie/gohtmx/config"
+	"github.com/happsie/gohtmx/model"
 	"github.com/labstack/echo/v4"
 	"net/http"
 	"time"
