@@ -13,6 +13,7 @@ body {
     background-color: #4D4C7D;
     min-width: 100svw;
     min-height: 100svh;
+    position: relative;
 }
 
 .twitch-login {
@@ -29,7 +30,7 @@ body {
     color: white;
 }
 
-.twitch-login button {
+button {
     background-color: #a970ff;
     outline: 0;
     padding: 1em;
@@ -77,4 +78,10 @@ body {
     max-height: 50px;
     border-radius: 100%;
     margin: .5em;
+}
+
+.logout {
+    position: absolute;
+    right: 30px;
+    top: 30px;
 }

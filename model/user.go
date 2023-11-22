@@ -4,8 +4,8 @@ import "time"
 
 type TwitchUser struct {
 	Login           string
-	DisplayName     string `db:"display_name"`
-	ProfileImageUrl string `db:"profile_image_url"`
+	DisplayName     string `db:"display_name" json:"display_name"`
+	ProfileImageUrl string `db:"profile_image_url" json:"profile_image_url"`
 	Email           string
 	ID              string
 }

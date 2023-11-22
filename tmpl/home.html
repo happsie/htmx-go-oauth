@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>HTMX - Home</title>
+    <title>HTMX - Go - MySQL - OAuth</title>
     <script src="https://unpkg.com/htmx.org@1.9.6"
             integrity="sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni"
             crossorigin="anonymous"></script>
@@ -12,11 +12,11 @@
     <div class="user">
         <img class="user-logo" src="{{ .ProfileImageUrl }}">
         <div class="user-info">
-            <p>{{ .DisplayName }}</p>
-            <p>{{ .Email }}</p>
-            <p>{{ .ID }}</p>
+            <p>Display name: {{ .DisplayName }}</p>
+            <p>Email: {{ .Email }}</p>
+            <p>ID: {{ .ID }}</p>
         </div>
     </div>
+    <button hx-post="/auth/logout" class="logout">Logout</button>
 </main>
 </body>
-</html>

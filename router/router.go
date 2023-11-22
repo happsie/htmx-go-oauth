@@ -6,8 +6,9 @@ import (
 	"github.com/happise/pixelwars/repository"
 	"github.com/happise/pixelwars/service"
 	"github.com/happise/pixelwars/utils"
+	"net/http"
 
-	//echojwt "github.com/labstack/echo-jwt/v4"
+	echojwt "github.com/labstack/echo-jwt/v4"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	slogecho "github.com/samber/slog-echo"
@@ -20,7 +21,6 @@ func Init(container container.Container) *echo.Echo {
 	}
 	e.Use(middleware.Recover())
 	e.Renderer = service.InitTemplates()
-	//e.Use(echojwt.WithConfig(GetJwtConfig(container))) Set this on routes instead! https://github.com/labstack/echo/issues/1737
 	e.Static("/css", "tmpl/css")
 	e.Static("/images", "tmpl/images")
 	createLoginHandlers(e, container)
@@ -31,23 +31,28 @@ func Init(container container.Container) *echo.Echo {
 func createTemplateHandlers(e *echo.Echo, container container.Container) {
 	userRepo := repository.NewUserRepository(container)
 	e.GET("/", func(c echo.Context) error {
-		_, err := c.Cookie("token")
-		auth, err := utils.GetAuthInfo(c, container.GetConfig())
-		// TODO: Also check if expired
+		_, err := utils.GetAuthInfo(c, container.GetConfig())
 		if err != nil {
-			container.GetLogger().Error("could not authenticate", err.Error())
 			return c.Render(200, "index.html", nil)
+		}
+		return c.Redirect(http.StatusSeeOther, "/home")
+	})
+	e.GET("/home", func(c echo.Context) error {
+		auth, err := utils.GetAuthInfo(c, container.GetConfig())
+		if err != nil {
+			return c.NoContent(http.StatusUnauthorized)
 		}
 		user, err := userRepo.Get(auth.UserId)
 		if err != nil {
-			return c.Render(200, "index.html", nil)
+			return c.NoContent(http.StatusUnauthorized)
 		}
 		return c.Render(200, "home.html", user)
-	})
+	}, echojwt.WithConfig(GetJwtConfig(container)))
 }
 
 func createLoginHandlers(e *echo.Echo, container container.Container) {
 	loginHandler := handlers.NewLoginHandler(container)
-	e.GET("/api/auth/callback", loginHandler.Callback)
-	e.GET("/api/auth/login", loginHandler.Login)
+	e.GET("/auth/callback", loginHandler.Callback) // TODO: Update api path, auth/callback
+	e.GET("/auth/login", loginHandler.Login)       // TODO: Update api path, auth/login
+	e.POST("/auth/logout", loginHandler.Logout)    // TODO: Update api path, auth/logout
 }

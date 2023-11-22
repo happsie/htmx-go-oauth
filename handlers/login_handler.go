@@ -6,20 +6,21 @@ import (
 	"github.com/happise/pixelwars/model"
 	"github.com/happise/pixelwars/repository"
 	"github.com/happise/pixelwars/service"
+	"github.com/happise/pixelwars/utils"
 	"github.com/labstack/echo/v4"
 	gonanoid "github.com/matoous/go-nanoid/v2"
 	"net/http"
 	"slices"
-	"time"
 )
 
 type LoginHandler interface {
 	Login(c echo.Context) error
 	Callback(c echo.Context) error
+	Logout(c echo.Context) error
 }
 type loginHandler struct {
 	container      container.Container
-	discordService service.TwitchAuthService
+	twitchService  service.TwitchAuthService
 	userRepository repository.UserRepository
 	jwtService     service.JWTService
 	twitchApi      service.TwitchApiService
@@ -31,7 +32,7 @@ var states []string
 func NewLoginHandler(container container.Container) LoginHandler {
 	return &loginHandler{
 		container:      container,
-		discordService: service.NewTwitchAuthService(container),
+		twitchService:  service.NewTwitchAuthService(container),
 		userRepository: repository.NewUserRepository(container),
 		jwtService:     service.NewJWTService(container),
 		twitchApi:      service.NewTwitchApiService(container),
@@ -54,7 +55,7 @@ func (lh loginHandler) Callback(c echo.Context) error {
 		return c.NoContent(http.StatusUnauthorized)
 	}
 	code := c.FormValue("code")
-	token, err := lh.discordService.VerifyCallback(code)
+	token, err := lh.twitchService.VerifyCallback(code)
 	if err != nil {
 		return c.NoContent(http.StatusUnauthorized)
 	}
@@ -78,12 +79,12 @@ func (lh loginHandler) Callback(c echo.Context) error {
 		lh.container.GetLogger().Error("error creating JWT", "error", err)
 		return c.NoContent(http.StatusUnauthorized)
 	}
-	cookie := new(http.Cookie)
-	cookie.Name = "token"
-	cookie.Value = jwt
-	cookie.Expires = time.Now().Add(72 * time.Hour)
-	cookie.Path = "/"
-	cookie.HttpOnly = true
-	c.SetCookie(cookie)
-	return c.Redirect(http.StatusSeeOther, "/")
+	utils.SetAuthCookie(c, jwt)
+	return c.Redirect(http.StatusSeeOther, "/home")
+}
+
+func (lh loginHandler) Logout(c echo.Context) error {
+	utils.InvalidateAuthCookie(c)
+	c.Response().Header().Add("HX-Redirect", "/")
+	return c.NoContent(302)
 }
