@@ -67,7 +67,7 @@ func (lh loginHandler) Callback(c echo.Context) error {
 	}
 	auth := model.Auth{
 		UserID:       user.ID,
-		AccessToken:  fmt.Sprintf("%s %s", token.TokenType, token.AccessToken),
+		AccessToken:  token.AccessToken,
 		RefreshToken: token.RefreshToken,
 		Expiry:       token.Expiry,
 	}

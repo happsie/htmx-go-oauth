@@ -36,7 +36,7 @@ func (c *container) GetOauthConfig() *oauth2.Config {
 		RedirectURL:  c.GetConfig().Oauth.RedirectURL,
 		ClientID:     c.GetConfig().Oauth.ClientID,
 		ClientSecret: c.GetConfig().Oauth.ClientSecret,
-		Scopes:       []string{"user:read:email"},
+		Scopes:       []string{"user:read:email", "chat:edit", "chat:read"},
 		Endpoint: oauth2.Endpoint{
 			AuthURL:  "https://id.twitch.tv/oauth2/authorize",
 			TokenURL: "https://id.twitch.tv/oauth2/token",

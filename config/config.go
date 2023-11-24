@@ -26,6 +26,10 @@ type Config struct {
 	Logging struct {
 		Router bool `yaml:"router"`
 	}
+	TwitchChatBot struct {
+		Token    string `yaml:"token"`
+		Username string `yaml:"username"`
+	} `yaml:"twitchChatBot"`
 }
 
 func LoadConfig(log *slog.Logger) Config {

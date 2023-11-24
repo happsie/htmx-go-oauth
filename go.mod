@@ -5,6 +5,7 @@ go 1.21
 toolchain go1.21.3
 
 require (
+	github.com/gempir/go-twitch-irc/v4 v4.0.0
 	github.com/go-sql-driver/mysql v1.7.1
 	github.com/golang-jwt/jwt v3.2.2+incompatible
 	github.com/golang-migrate/migrate/v4 v4.16.2

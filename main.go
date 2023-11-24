@@ -6,6 +6,7 @@ import (
 	"github.com/happsie/gohtmx/container"
 	"github.com/happsie/gohtmx/repository"
 	"github.com/happsie/gohtmx/router"
+	"github.com/happsie/gohtmx/service"
 	"log/slog"
 	"os"
 )
@@ -19,6 +20,14 @@ func main() {
 		os.Exit(1)
 	}
 	cont := container.NewContainer(conf, logger, db)
+	twitchIRC := service.NewTwitchIRC(cont)
+	go func() {
+		err = twitchIRC.StartIRC([]string{"happsiexd"})
+		if err != nil {
+			logger.Error("could not connect to twitch irc", "error", err)
+			os.Exit(1)
+		}
+	}()
 	r := router.Init(cont)
 	err = r.Start(fmt.Sprintf(":%d", conf.Port))
 	if err != nil {

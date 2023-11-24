@@ -48,6 +48,8 @@ func createTemplateHandlers(e *echo.Echo, container container.Container) {
 		}
 		return c.Render(200, "home.html", user)
 	}, echojwt.WithConfig(GetJwtConfig(container)))
+	commandHandler := handlers.NewCommandHandler(container)
+	e.GET("/commands", commandHandler.List)
 }
 
 func createLoginHandlers(e *echo.Echo, container container.Container) {

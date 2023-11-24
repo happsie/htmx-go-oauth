@@ -27,7 +27,9 @@ func (ur userRepository) Save(user model.TwitchUser, auth model.Auth) error {
 				(login, display_name, id, profile_image_url, email) 
 				VALUES (:login, :display_name, :id, :profile_image_url, :email) 
 				ON DUPLICATE KEY UPDATE profile_image_url = :profile_image_url, login = :login, display_name = :display_name`, user)
-	_, err = tx.NamedExec(`INSERT INTO user_tokens (user_id, access_token, refresh_token) VALUES (:user_id, :access_token, :refresh_token)`, auth)
+	_, err = tx.NamedExec(`INSERT INTO user_tokens (user_id, access_token, refresh_token)
+	 							VALUES (:user_id, :access_token, :refresh_token)
+								ON DUPLICATE KEY UPDATE access_token = :access_token, refresh_token = :refresh_token`, auth)
 	err = tx.Commit()
 	if err != nil {
 		return err

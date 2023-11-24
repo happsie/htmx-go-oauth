@@ -13,3 +13,7 @@ db:
 
 jwt: 
     secret: secret
+
+twitchChatBot: 
+    token: something
+    username: something

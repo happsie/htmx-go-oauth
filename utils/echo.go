@@ -35,7 +35,7 @@ func SetAuthCookie(c echo.Context, token string) {
 	cookie := new(http.Cookie)
 	cookie.Name = "token"
 	cookie.Value = token
-	cookie.Expires = time.Now().Add(5 * time.Minute) // TODO: Set time to oauth exp
+	cookie.Expires = time.Now().Add(60 * time.Minute) // TODO: Set time to oauth exp
 	cookie.Path = "/"
 	cookie.HttpOnly = true
 	c.SetCookie(cookie)

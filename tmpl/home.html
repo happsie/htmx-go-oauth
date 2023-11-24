@@ -9,14 +9,15 @@
 </head>
 <body>
 <main class="container">
-    <div class="user">
+    <div class="box">
         <img class="user-logo" src="{{ .ProfileImageUrl }}">
-        <div class="user-info">
+        <div>
             <p>Display name: {{ .DisplayName }}</p>
             <p>Email: {{ .Email }}</p>
             <p>ID: {{ .ID }}</p>
         </div>
     </div>
+    <div hx-get="/commands" hx-trigger="load"></div>
     <button hx-post="/auth/logout" class="logout">Logout</button>
 </main>
 </body>

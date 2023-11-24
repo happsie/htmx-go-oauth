@@ -1,0 +1,24 @@
+{{ block "commands" . }}
+<div class="box commands">
+    <h2>Commands</h2>
+    <table>
+        <tr>
+            <th>Command</th>
+            <th>Response</th>
+        </tr>
+        {{ range . }}
+        <tr>
+            <td>!{{ .Command }}</td>
+            <td>{{ .Response }}</td>
+        </tr>
+        {{ end }}
+    </table>
+</div>
+{{ end }}
+
+{{ block "commands-error" . }}
+<div class="box commands">
+    <h2>Commands</h2>
+    <p>Could not load commands</p>
+</div>
+{{ end }}
