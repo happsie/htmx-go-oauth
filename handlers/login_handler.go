@@ -50,10 +50,12 @@ func (lh loginHandler) Login(c echo.Context) error {
 }
 
 func (lh loginHandler) Callback(c echo.Context) error {
-	if !slices.Contains(states, c.FormValue("state")) {
+	state := c.FormValue("state")
+	if !slices.Contains(states, state) {
 		lh.container.GetLogger().Error("invalid state", "url", c.Request().URL.Path)
 		return c.NoContent(http.StatusUnauthorized)
 	}
+	deleteState(state)
 	code := c.FormValue("code")
 	token, err := lh.twitchService.VerifyCallback(code)
 	if err != nil {
@@ -87,4 +89,13 @@ func (lh loginHandler) Logout(c echo.Context) error {
 	utils.InvalidateAuthCookie(c)
 	c.Response().Header().Add("HX-Redirect", "/")
 	return c.NoContent(302)
+}
+
+func deleteState(state string) {
+	for i, v := range states {
+		if v == state {
+			slices.Delete(states, i, i+1)
+			break
+		}
+	}
 }
