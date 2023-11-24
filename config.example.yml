@@ -1,15 +1,15 @@
 port: 8080
 
 oauth: 
-    redirectUrl: something
+    redirectUrl: http://localhost:8080/auth/callback
     clientId: something
     clientSecret: something
-    endpoint: something
 
 db: 
     user: root
-    password: password
+    password: gohtmx
     database: gohtmx
+    host: mysql:3306
 
 jwt: 
     secret: secret

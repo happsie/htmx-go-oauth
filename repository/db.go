@@ -14,7 +14,7 @@ import (
 
 func NewDatabase(log *slog.Logger, config config.Config) (*sqlx.DB, error) {
 	log.Info("connecting to database")
-	db, err := sqlx.Connect("mysql", fmt.Sprintf("%s:%s@/%s", config.Database.User, config.Database.Password, config.Database.Database))
+	db, err := sqlx.Connect("mysql", fmt.Sprintf("%s:%s@(%s)/%s", config.Database.User, config.Database.Password, config.Database.Host, config.Database.Database))
 	if err != nil {
 		return nil, err
 	}
