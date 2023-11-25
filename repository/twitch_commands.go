@@ -19,7 +19,7 @@ func NewTwitchCommandRepository(container container.Container) TwitchCommandRepo
 	}
 }
 
-func (ur twitchCommandRepository) List(userID string) ([]model.TwitchCommand, error) {
+func (ur *twitchCommandRepository) List(userID string) ([]model.TwitchCommand, error) {
 	db := ur.container.GetDB()
 	commands := []model.TwitchCommand{}
 	err := db.Select(&commands, "SELECT * FROM twitch_commands WHERE user_id = ?", userID)

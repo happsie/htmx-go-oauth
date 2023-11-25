@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"fmt"
 	"github.com/happsie/gohtmx/container"
 	"github.com/happsie/gohtmx/model"
 	"github.com/happsie/gohtmx/repository"
@@ -26,7 +25,7 @@ type loginHandler struct {
 	twitchApi      service.TwitchApiService
 }
 
-// TODO: append when a new login occurs, delete on successful callback. Make it threadsafe
+// TODO: This is not scaling well in a kubernetes environment, since load balancing might send callbacks to a different pod
 var states []string
 
 func NewLoginHandler(container container.Container) LoginHandler {
