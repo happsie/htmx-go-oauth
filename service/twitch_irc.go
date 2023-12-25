@@ -18,7 +18,7 @@ func NewTwitchIRC(container container.Container) *TwitchIRC {
 }
 
 func (ti *TwitchIRC) StartIRC(channels []string) error {
-	if ti.client != nil {
+	if ti.client != nil || !ti.container.GetConfig().TwitchChatBot.Enabled {
 		return nil
 	}
 	twitchConfig := ti.container.GetConfig().TwitchChatBot

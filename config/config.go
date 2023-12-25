@@ -29,6 +29,7 @@ type Config struct {
 	TwitchChatBot struct {
 		Token    string `yaml:"token"`
 		Username string `yaml:"username"`
+		Enabled  bool   `yaml:"enabled"`
 	} `yaml:"twitchChatBot"`
 }
 

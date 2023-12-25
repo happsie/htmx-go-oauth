@@ -1,6 +1,9 @@
 {{ block "commands" . }}
 <div class="box commands">
-    <h2>Commands</h2>
+    <div class="commands-header">
+        <h2>Commands</h2>
+        <button hx-get="/commands/modal" hx-target="body" hx-swap="beforeend" class="add-cmd-btn">+</button>
+    </div>
     <table>
         <tr>
             <th>Command</th>
@@ -20,5 +23,20 @@
 <div class="box commands">
     <h2>Commands</h2>
     <p>Could not load commands</p>
+</div>
+{{ end }}
+
+{{ block "command-modal" . }}
+<div id="modal" _="on closeModal add .closing then wait for animationend then remove me">
+    <div class="modal-underlay" _="on click trigger closeModal"></div>
+    <div class="modal-content">
+        <h1>Add command</h1>
+        <form>
+            <input type="text" placeholder="Command" name="command">
+            <textarea placeholder="Response" rows="5" name="response"></textarea>
+            <button type="submit" hx-post="/commands/add" hx-target="#commands">Save</button>
+        </form>
+        <button _="on click trigger closeModal">Close</button>
+    </div>
 </div>
 {{ end }}

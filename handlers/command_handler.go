@@ -10,6 +10,7 @@ import (
 
 type CommandHandler interface {
 	List(c echo.Context) error
+	Modal(c echo.Context) error
 }
 
 type commandHandler struct {
@@ -41,4 +42,8 @@ func (ch *commandHandler) List(c echo.Context) error {
 		return c.Render(200, "commands-error", nil)
 	}
 	return c.Render(200, "commands", commands)
+}
+
+func (ch *commandHandler) Modal(c echo.Context) error {
+	return c.Render(200, "command-modal", nil)
 }
